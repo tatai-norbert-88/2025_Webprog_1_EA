@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CRUD táblázat</title>
+    <link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 class="header">Web-programozás-1 Előadás Házi feladat</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html" >Home</a></li>
+            <li><a href="kapcsolat.html">Contact</a></li>
+            <li><a href="table2.html"class="active">Táblázat</a></li>
+            <li><a href="html5.html">HTML5</a></li>
+            <li><a href="chartjs.html">ChartJs</a></li>
+            <li><a href="ajax.html">Ajax</a></li>
+        </ul>
+    </nav>
+      <main>
+        <h2>CRUD Táblázat</h2>
+    
+        <div>
+        <input type="text" id="searchInput" class="search" placeholder="Keresés...">
+        </div>
+    
+        <form id="dataForm">
+          <input type="text" id="name" placeholder="Név" required />
+          <input type="text" id="email" placeholder="Email" required />
+          <input type="text" id="city" placeholder="Város" required />
+          <input type="text" id="position" placeholder="Beosztás" required />
+          <button type="submit">Hozzáadás</button>
+          <span class="error" id="formError"></span>
+        </form>
+    
+          
+          <table id="dataTable">
+            <thead>
+              <tr>
+                <th data-column="name">Név</th>
+                <th data-column="email">Email</th>
+                <th data-column="city">Város</th>
+                <th data-column="position">Beosztás</th>
+                <th>Művelet</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+      </main>
+    
+      
+    
+      <script src="table.js"></script>
+      <footer>Készítette: Tatai Norbert | NEPTUN: VH4FXA</footer>
+</body>
+</html>
