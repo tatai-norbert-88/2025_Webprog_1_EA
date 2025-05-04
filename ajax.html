@@ -1,59 +1,56 @@
 <!DOCTYPE html>
 <html lang="hu">
-    <head>
-        <head>
-            <meta charset="UTF-8">
-            <title>AJAX CRUD alkalmazás</title>
-            <script defer src="ajax.js"></script>
-        <link type="text/css" rel="stylesheet" href="style.css">
-      </head>
-      <header>
-          <h1 class="header">Web-programozás-1 Előadás Házi feladat</h1>
-      </header>
-      <nav>
-          <ul>
-              <li><a href="index.html" >Home</a></li>
-              <li><a href="kapcsolat.html">Contact</a></li>
-            <li><a href="table2.html">Táblázat</a></li>
-              <li><a href="html5.html">HTML5</a></li>
-              <li><a href="chartjs.html">ChartJs</a></li>
-              <li><a href="ajax.html"class="active">Ajax</a></li>
-          </ul>
-      </nav>
-    <body>
+<head>
+  <meta charset="UTF-8">
+  <title>AJAX CRUD alkalmazás</title>
+  <script defer src="ajax.js"></script>
+  <link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1 class="header">Web-programozás-1 Előadás Házi feladat</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="index.html">Kezdőlap</a></li>
+      <li><a href="table2.html">Táblázat</a></li>
+      <li><a href="html5.html">HTML5</a></li>
+      <li><a href="chartjs.html">ChartJs</a></li>
+      <li><a href="ajax.html" class="active">Ajax</a></li>
+      <li><a href="oojs.html">OOJS</a></li>
+    </ul>
+  </nav>
 
-    
-      
+  
+  <div id="readDiv"></div>
 
-    <div id = 'code'></div>
-    <div id = 'readDiv'></div>
-    <div id = 'createDiv'>
-      <h1>Create</h1>
-      Name (required, max 30): <input id="name1" type="text"></input><br>
-      Magassag (required, max 4): <input id="city1" type="text"></input><br>
-      Suly (required, max 4): <input id="phone1" type="text"></input><br>
-      <button type="submit" onclick="create();">Create</button><br>
-      <div id = 'createResult'></div>
-    </div> 
-    <div id = 'updateDiv'>
-      <h1>Update</h1>
-      ID (required): <input id="idUpd" type="text"></input><br> 
-      <button type="submit" onclick="getDataForId();">getDataForId</button><br>
-      Name (required, max 30): <input id="name2" type="text"></input><br>
-      Magassag (required, max 4): <input id="city2" type="text"></input><br>
-      Suly (required, max 4): <input id="phone2" type="text"></input><br>
-      <button type="submit" onclick="update();">Update</button><br>
-      <div id = 'updateResult'></div>      
-    </div> 
-    <div id = 'deleteDiv'>
-      <h1>Delete</h1>
-      ID (required): <input id="idDel" type="text"></input><br> 
-      <button type="submit" onclick="deleteF();">Delete</button><br>
-      <div id = 'deleteResult'></div>      
-    </div> 
+  <div id="createDiv">
+    <h1>Új adat rögzítése</h1>
+    Név (max 100): <input id="name1" type="text"><br>
+    Magasság (cm): <input id="height1" type="text"><br>
+    Súly (kg): <input id="weight1" type="text"><br>
+    <button onclick="create()">Mentés</button><br>
+    <div id="createResult"></div>
+  </div>
 
-  <hr>
-        
+  <div id="updateDiv">
+    <h1>Adatmódosítás</h1>
+    ID (kötelező): <input id="idUpd" type="text"><br>
+    <button onclick="getDataForId()">Adatok betöltése</button><br>
+    Név (max 100): <input id="name2" type="text"><br>
+    Magasság (cm): <input id="height2" type="text"><br>
+    Súly (kg): <input id="weight2" type="text"><br>
+    <button onclick="update()">Update</button><br>
+    <div id="updateResult"></div>
+  </div>
+
+  <div id="deleteDiv">
+    <h1>Adattörlés</h1>
+    ID (kötelező): <input id="idDel" type="text"><br>
+    <button onclick="deleteF()">Törlés</button><br>
+    <div id="deleteResult"></div>
+  </div>
+
   <footer>Készítette: Tatai Norbert | NEPTUN: VH4FXA</footer>
 </body>
 </html>

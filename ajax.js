@@ -1,134 +1,99 @@
-code="AAAAAAttt123";
-url="http://gamf.nhely.hu/ajax2/";
+let code = "VH4FXAujkod001";
+let url = "http://gamf.nhely.hu/ajax2/";
+
 async function read() {
-  document.getElementById("code").innerHTML="code="+code;
+  
   let response = await fetch(url, {
-      method: 'post',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: "code="+code+"&op=read"
+    method: 'post',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: "code=" + code + "&op=read"
   });
+
   let data = await response.text();
   data = JSON.parse(data);
   let list = data.list;
-  str="<H1>Read</H1>";
-  str+="<p>Number of records: "+data.rowCount+"</p>";
-  str+="<p>Last max "+data.maxNum+" records:</p>";
-  str+="<table><tr><th>id</th><th>name</th><th>city</th><th>phone</th><th>code</th></tr>";
-  for(let i=0; i<list.length; i++)
-    str += "<tr><td>"+list[i].id+"</td><td>"+list[i].name+"</td><td>"+list[i].city+"</td><td>"+list[i].phone+"</td><td>"+list[i].code+"</td></tr>";
-  str +="</table>";
-  document.getElementById("readDiv").innerHTML=str;
+  let str = "<h1>Rögzített adatok</h1>";
+  str += "<p>Rekordok száma: " + data.rowCount + "</p>";
+  str += "<p>Utolsó 100 rekord:</p>";
+  str += "<table><tr><th>ID</th><th>Név</th><th>Magasság</th><th>Súly</th><th>Kód</th></tr>";
+  for (let i = 0; i < list.length; i++) {
+    str += "<tr><td>" + list[i].id + "</td><td>" + list[i].name + "</td><td>" + list[i].height + "</td><td>" + list[i].weight + "</td><td>" + list[i].code + "</td></tr>";
+  }
+  str += "</table>";
+  document.getElementById("readDiv").innerHTML = str;
 }
 
-async function create(){
-  // name: reserved word
-  nameStr = document.getElementById("name1").value;
-  city = document.getElementById("city1").value;
-  phone = document.getElementById("phone1").value;
-  if(nameStr.length>0 && nameStr.length<=30 && city.length>0 && city.length<=30 && phone.length>0 && phone.length<=30 && code.length<=30){
+async function create() {
+  let name = document.getElementById("name1").value;
+  let height = document.getElementById("height1").value;
+  let weight = document.getElementById("weight1").value;
+  if (name.length > 0 && height.length > 0 && weight.length > 0) {
     let response = await fetch(url, {
       method: 'post',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: "code="+code+"&op=create&name="+nameStr+"&city="+city+"&phone="+phone
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: "code=" + code + "&op=create&name=" + name + "&height=" + height + "&weight=" + weight
     });
-    let data = await response.text(); 
-    if(data>0)
-      str="Create successful!";
-    else
-    str="Create NOT successful!";
-    document.getElementById("createResult").innerHTML=str;
-    document.getElementById("name1").value="";
-    document.getElementById("city1").value="";
-    document.getElementById("phone1").value="";
+    let data = await response.text();
+    document.getElementById("createResult").innerHTML = (data > 0) ? "Mentés sikeres!" : "Mentés sikertelen!";
     read();
+  } else {
+    document.getElementById("createResult").innerHTML = "Hiba: Minden mező kötelező!";
   }
-  else
-    document.getElementById("createResult").innerHTML="Validation error!!";
 }
 
 async function getDataForId() {
+  let id = document.getElementById("idUpd").value;
   let response = await fetch(url, {
-      method: 'post',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: "code="+code+"&op=read"
+    method: 'post',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: "code=" + code + "&op=read"
   });
+
   let data = await response.text();
   data = JSON.parse(data);
   let list = data.list;
-  for(let i=0; i<list.length; i++)
-    if(list[i].id==document.getElementById("idUpd").value){
-      document.getElementById("name2").value=list[i].name;
-      document.getElementById("city2").value=list[i].city;
-      document.getElementById("phone2").value=list[i].phone;
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].id == id) {
+      document.getElementById("name2").value = list[i].name;
+      document.getElementById("height2").value = list[i].height;
+      document.getElementById("weight2").value = list[i].weight;
     }
+  }
 }
 
-async function update(){
-  // name: reserved word
-  id = document.getElementById("idUpd").value;
-  nameStr = document.getElementById("name2").value;
-  city = document.getElementById("city2").value;
-  phone = document.getElementById("phone2").value;
-  if(id.length>0 && id.length<=30 && nameStr.length>0 && nameStr.length<=30 && city.length>0 && city.length<=30 && phone.length>0 && phone.length<=30 && code.length<=30){
+async function update() {
+  let id = document.getElementById("idUpd").value;
+  let name = document.getElementById("name2").value;
+  let height = document.getElementById("height2").value;
+  let weight = document.getElementById("weight2").value;
+  if (id.length > 0 && name.length > 0 && height.length > 0 && weight.length > 0) {
     let response = await fetch(url, {
       method: 'post',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: "code="+code+"&op=update&id="+id+"&name="+nameStr+"&city="+city+"&phone="+phone
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: "code=" + code + "&op=update&id=" + id + "&name=" + name + "&height=" + height + "&weight=" + weight
     });
-    let data = await response.text(); 
-    if(data>0)
-      str="Update successful!";
-    else
-    str="Update NOT successful!";
-    document.getElementById("updateResult").innerHTML=str;
-    document.getElementById("idUpd").value="";
-    document.getElementById("name2").value="";
-    document.getElementById("city2").value="";
-    document.getElementById("phone2").value="";
+    let data = await response.text();
+    document.getElementById("updateResult").innerHTML = (data > 0) ? "Update sikeres!" : "Update sikertelen!";
     read();
+  } else {
+    document.getElementById("updateResult").innerHTML = "Hiba: Minden mező kötelező!";
   }
-  else
-    document.getElementById("updateResult").innerHTML="Validation error!!";
 }
 
-//delete: resetved word
-async function deleteF(){
-  id = document.getElementById("idDel").value;
-  if(id.length>0 && id.length<=30){
+async function deleteF() {
+  let id = document.getElementById("idDel").value;
+  if (id.length > 0) {
     let response = await fetch(url, {
       method: 'post',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: "code="+code+"&op=delete&id="+id
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: "code=" + code + "&op=delete&id=" + id
     });
-    let data = await response.text(); 
-    if(data>0)
-      str="Delete successful!";
-    else
-    str="Delete NOT successful!";
-    document.getElementById("deleteResult").innerHTML=str;
-    document.getElementById("idDel").value="";
+    let data = await response.text();
+    document.getElementById("deleteResult").innerHTML = (data > 0) ? "Törlés sikeres!" : "Törlés sikertelen!";
     read();
+  } else {
+    document.getElementById("deleteResult").innerHTML = "Hiba: ID szükséges!";
   }
-  else
-    document.getElementById("deleteResult").innerHTML="Validation error!!";
 }
 
-window.onload = function() {
-    read();
-};
-
+window.onload = read;
